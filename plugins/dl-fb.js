@@ -19,11 +19,12 @@ cmd({
     const apiUrl = `https://nova-downloadbmb.vercel.app/api/facebook?url=${encodeURIComponent(q)}`;
     const { data } = await axios.get(apiUrl);
 
-    if (!data.success || !data.url) {
+    // Tumia 'download' badala ya 'url' kama field sahihi ya link
+    if (!data.success || !data.download) {
       return reply("❌ Failed to fetch the video. Please try another link.");
     }
 
-    const videoUrl = data.url;
+    const videoUrl = data.download;
     await conn.sendMessage(from, {
       video: { url: videoUrl },
       caption: "📥 *Facebook Video Downloaded*\n\n- Powered by 𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙷 ✅",
@@ -31,6 +32,6 @@ cmd({
 
   } catch (error) {
     console.error("Error:", error);
-    reply("❌ Error fetching the video. Please try again later.");
+    reply("❌ Error fetching the video. Please try again.");
   }
 });
