@@ -11,19 +11,48 @@ cmd({
   try {
     if (!isCreator) {
       return await client.sendMessage(from, {
-        text: "*📛 This is an owner command.*"
+        text: "*📛 This is an owner command.*",
+        contextInfo: {
+          forwardingScore: 999,
+          isForwarded: true,
+          forwardedNewsletterMessageInfo: {
+            newsletterJid: "120363382023564830@newsletter",
+            newsletterName: "𝙽𝙾𝚅𝙰-𝚇𝙼𝙳",
+            serverMessageId: 1
+          }
+        }
       }, { quoted: message });
     }
 
     if (!match.quoted) {
       return await client.sendMessage(from, {
-        text: "*🍁 Please reply to a view once message!*"
+        text: "*🍁 Please reply to a view once message!*",
+        contextInfo: {
+          forwardingScore: 999,
+          isForwarded: true,
+          forwardedNewsletterMessageInfo: {
+            newsletterJid: "120363382023564830@newsletter",
+            newsletterName: "𝙽𝙾𝚅𝙰-𝚇𝙼𝙳",
+            serverMessageId: 1
+          }
+        }
       }, { quoted: message });
     }
 
     const buffer = await match.quoted.download();
     const mtype = match.quoted.mtype;
-    const options = { quoted: message };
+    const options = {
+      quoted: message,
+      contextInfo: {
+        forwardingScore: 999,
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: "120363382023564830@newsletter",
+          newsletterName: "𝙽𝙾𝚅𝙰-𝚇𝙼𝙳",
+          serverMessageId: 1
+        }
+      }
+    };
 
     let messageContent = {};
     switch (mtype) {
@@ -50,7 +79,8 @@ cmd({
         break;
       default:
         return await client.sendMessage(from, {
-          text: "❌ Only image, video, and audio messages are supported"
+          text: "❌ Only image, video, and audio messages are supported",
+          contextInfo: options.contextInfo
         }, { quoted: message });
     }
 
@@ -58,7 +88,16 @@ cmd({
   } catch (error) {
     console.error("vv Error:", error);
     await client.sendMessage(from, {
-      text: "❌ Error fetching vv message:\n" + error.message
+      text: "❌ Error fetching vv message:\n" + error.message,
+      contextInfo: {
+        forwardingScore: 999,
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: "120363382023564830@newsletter",
+          newsletterName: "𝙽𝙾𝚅𝙰-𝚇𝙼𝙳",
+          serverMessageId: 1
+        }
+      }
     }, { quoted: message });
   }
 });
