@@ -16,15 +16,14 @@ cmd({
 
     await conn.sendMessage(from, { react: { text: '⏳', key: m.key } });
 
-    const apiUrl = `https://nova-downloadbmb.vercel.app/api/facebook?url=${encodeURIComponent(q)}`;
+    const apiUrl = `https://nova-downloadbmb.vercel.app/fb?url=${encodeURIComponent(q)}`;
     const { data } = await axios.get(apiUrl);
 
-    // Tumia 'download' badala ya 'url' kama field sahihi ya link
-    if (!data.success || !data.download) {
+    if (!data.success || !data.url) {
       return reply("❌ Failed to fetch the video. Please try another link.");
     }
 
-    const videoUrl = data.download;
+    const videoUrl = data.url;
     await conn.sendMessage(from, {
       video: { url: videoUrl },
       caption: "📥 *Facebook Video Downloaded*\n\n- Powered by 𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙷 ✅",
